@@ -24,7 +24,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
         rel="stylesheet">
-    @yield('styles')
+    @stack('styles')
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 </head>
@@ -475,7 +475,7 @@
                     </div>
 
                     <div class="header-tools__item hover-container">
-                        <a href="login.html" class="header-tools__item">
+                        <a href="{{ route('login') }}" class="header-tools__item">
                             <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <use href="#icon_user" />
@@ -515,30 +515,43 @@
                 <div class="tab-pane fade show active" id="tab-item-login" role="tabpanel"
                     aria-labelledby="login-tab">
                     <div class="login-form">
-                        <form method="POST" action="{{ route('login') }}" name="login-form" class="needs-validation"
-                            novalidate="">
+                        <form method="POST" action="{{ route('login') }}" name="login-form"
+                            class="needs-validation" novalidate="">
                             @csrf
 
                             <div class="form-floating mb-3">
-                                <input class="form-control form-control_gray " name="email" value=""
-                                    required="" autocomplete="email" autofocus="">
+                                <input class="form-control form-control_gray @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required="" autocomplete="email" autofocus="">
                                 <label for="email">Email address *</label>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="pb-3"></div>
 
                             <div class="form-floating mb-3">
-                                <input id="password" type="password" class="form-control form-control_gray "
+                                <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror"
                                     name="password" required="" autocomplete="current-password">
                                 <label for="customerPasswodInput">Password *</label>
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
 
                             <div class="customer-option mt-4 text-center">
                                 <span class="text-secondary">No account yet?</span>
-                                <a href="{{route('register')}}" class="btn-text js-show-register">Create Account</a> | <a
-                                    href="my-account.html" class="btn-text js-show-register">My Account</a>
+                                <a href="{{ route('register') }}" class="btn-text js-show-register">Create
+                                    Account</a> | <a href="{{ route('user.index') }}" class="btn-text js-show-register">My
+                                    Account</a>
                             </div>
                         </form>
                     </div>
@@ -547,7 +560,7 @@
         </section>
     </main>
 
-    <hr class="mt-5 text-secondary" />
+    {{-- <hr class="mt-5 text-secondary" />
     <footer class="footer footer_type_2">
         <div class="footer-middle container">
             <div class="row row-cols-lg-5 row-cols-2">
@@ -717,7 +730,7 @@
                 </a>
             </div>
         </div>
-    </footer>
+    </footer> --}}
 
     <div id="scrollTop" class="visually-hidden end-0"></div>
     <div class="page-overlay"></div>

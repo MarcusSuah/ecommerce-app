@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="surfside media" />
+    <meta name="author" content="Marcus Suah media" />
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css2?family=Allura&amp;display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
         rel="stylesheet">
     @yield('styles')
     <!-- Scripts -->
-    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    @vite(['resources/js/app.js'])
 </head>
 
 <body class="gradient-bg">
@@ -648,7 +648,11 @@
 
         <div class="footer-bottom">
             <div class="container d-md-flex align-items-center">
-                <span class="footer-copyright me-auto">© 2024 Surfside Media</span>
+                <span class="footer-copyright me-auto">
+                    <?php
+                    echo '&copy; ' . date('Y') . ' Least Gbelle Media. All rights reserved.';
+                    ?>
+                </span>
                 <div class="footer-settings d-md-flex align-items-center">
                     <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a
                         href="terms-conditions.html">Terms &amp;

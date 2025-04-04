@@ -32,7 +32,6 @@ class AuthAdmin
         }
         else
         {
-            Session::flash('error', 'You must be logged to access this page.');
             return redirect()->route('login');
         }
     }
